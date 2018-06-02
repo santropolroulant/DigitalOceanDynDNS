@@ -11,14 +11,10 @@ My use case: *Connect to home server that is on a dynamic IP via a fixed domain 
 
 2. Place the token in ~/.config/do_dns_update/access_token
 
-3. Make script runnable.
+3. [Cron](http://en.wikipedia.org/wiki/Cron#Predefined_scheduling_definitions) the script to update Digital Ocean's DNS at desired frequency. (Note: *DO API rate limit is currently 1200 /hr. Each script run uses 2 calls.*)
 
-		chmod +x /path/to/file/do_dns_update.sh
-
-3. [Cron](http://en.wikipedia.org/wiki/Cron#Predefined_scheduling_definitions) the script to update Digital Ocean's DNS at desired frequency. (Note: *API rate limit is currently 1200 /hr. Script run uses 2.*)
-
-		# once every two days @ 7:30am.
-		30 07 */2 * * /path/to/file/do_dns_update.sh -s nas mydomain.com
+		# four times an hour
+		*/15 * * * * /path/to/file/do_dns_update.sh -s nas mydomain.com
 
 ## Options
 
